@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://suhlxvis8mdv"]
+
+[ext_resource type="Texture2D" uid="uid://tmv7nge0pitn" path="res://textures/joint_highlighter.png" id="1_4e1y0"]
+[ext_resource type="Script" uid="uid://b1jqfxhbkdbjc" path="res://src/limb_joint.gd" id="2_mkqxy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mkqxy"]
+radius = 12.0415945
+
+[node name="LimbJoint" type="Marker2D" unique_id=782151775]
+script = ExtResource("2_mkqxy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1455277054]
+z_index = 1
+texture = ExtResource("1_4e1y0")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1388523205]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=529384875]
+shape = SubResource("CircleShape2D_mkqxy")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

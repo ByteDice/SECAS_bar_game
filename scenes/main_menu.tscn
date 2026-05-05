@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://8rpm2uklud0j"]
+
+[ext_resource type="Script" uid="uid://c16iy4k5dj2y2" path="res://src/main_menu.gd" id="1_bqqt6"]
+[ext_resource type="PackedScene" uid="uid://cbsfqukshbpn3" path="res://objects/bull.tscn" id="1_ekxnf"]
+[ext_resource type="Theme" uid="uid://bgkw23s8d1keo" path="res://themes/buttons.tres" id="1_l6cm7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0dkrt"]
+bg_color = Color(0.42208722, 0.18912315, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ekxnf"]
+font_size = 41
+
+[node name="Control" type="Control" unique_id=959537991]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bqqt6")
+
+[node name="Background" type="Panel" parent="." unique_id=28278764]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0dkrt")
+
+[node name="InteractiblesContainer" type="VBoxContainer" parent="." unique_id=397142129]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -310.0
+offset_top = -285.0
+offset_right = 310.0
+offset_bottom = -96.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 80
+
+[node name="Bull" parent="InteractiblesContainer" unique_id=1103151286 instance=ExtResource("1_ekxnf")]
+position = Vector2(294.5, 576)
+speed = 3.0
+increment = 0.0
+
+[node name="Label" type="Label" parent="InteractiblesContainer" unique_id=1054015918]
+layout_mode = 2
+text = "Super Epic Cool Awesome Stuff:
+The Bar Game"
+label_settings = SubResource("LabelSettings_ekxnf")
+horizontal_alignment = 1
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="InteractiblesContainer" unique_id=871886025]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="PlayButton" type="Button" parent="InteractiblesContainer/ButtonsContainer" unique_id=1194061982]
+custom_minimum_size = Vector2(175, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme = ExtResource("1_l6cm7")
+text = "Play"
+
+[node name="Label" type="Label" parent="." unique_id=1829722005]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -49.0
+offset_right = 261.0
+grow_vertical = 0
+text = "Made for the LBS 2026 Game Jam.
+Theme: \"Riding Farmers\""
+
+[node name="Tutorial" type="Label" parent="." unique_id=1851315910]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 806.0
+offset_top = -77.0
+offset_right = 1150.0
+offset_bottom = -2.0
+grow_vertical = 0
+text = "Tutorial:
+Grab the limbs when the peasant looses grip
+(and place them back on the bull)"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="InteractiblesContainer/ButtonsContainer/PlayButton" to="." method="_on_play_button_pressed"]

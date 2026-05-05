@@ -1,0 +1,258 @@
+[gd_scene format=3 uid="uid://dnkurgmvsraog"]
+
+[ext_resource type="Texture2D" uid="uid://xrovxihoa6y" path="res://textures/disposable/torso.png" id="1_pprhf"]
+[ext_resource type="Texture2D" uid="uid://kj7vfpgm52tu" path="res://textures/disposable/head.png" id="2_junom"]
+[ext_resource type="Script" uid="uid://dls3kam5cig67" path="res://src/rider.gd" id="2_ykyjo"]
+[ext_resource type="Script" uid="uid://c78x72xskyxw8" path="res://src/grabbable_rb.gd" id="3_g3mg6"]
+[ext_resource type="Texture2D" uid="uid://cl1dq8odm8ua8" path="res://textures/disposable/arm1.png" id="4_dwajs"]
+[ext_resource type="Texture2D" uid="uid://cbsp2iv0tfre" path="res://textures/disposable/arm2.png" id="5_dt3rm"]
+[ext_resource type="Texture2D" uid="uid://b34p8b020h7l5" path="res://textures/disposable/leg1.png" id="6_atfka"]
+[ext_resource type="Texture2D" uid="uid://dgcvaqn8j5ach" path="res://textures/disposable/leg2.png" id="7_be4wm"]
+[ext_resource type="Texture2D" uid="uid://cg3ymuxihmxj0" path="res://textures/particle_ball.png" id="9_atfka"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7m3ko"]
+radius = 16.0
+height = 69.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f46kd"]
+radius = 34.0
+height = 91.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nmc1l"]
+radius = 19.5
+height = 96.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_atfka"]
+radius = 31.0
+height = 62.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ykyjo"]
+radius = 53.0
+height = 154.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uxov2"]
+radius = 52.23983
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_atfka"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 57.44
+initial_velocity_max = 581.0
+gravity = Vector3(0, 98, 0)
+scale_min = 0.5
+scale_max = 2.0
+
+[node name="Rider" type="Node2D" unique_id=1530408668]
+script = ExtResource("2_ykyjo")
+
+[node name="Joints" type="Node2D" parent="." unique_id=307528054]
+
+[node name="Body_ArmL1" type="PinJoint2D" parent="Joints" unique_id=1489962566]
+position = Vector2(-5, -33)
+node_a = NodePath("../../Body")
+node_b = NodePath("../../ArmL1")
+
+[node name="Body_ArmR1" type="PinJoint2D" parent="Joints" unique_id=1841028804]
+position = Vector2(-5, -33)
+node_a = NodePath("../../Body")
+node_b = NodePath("../../ArmR1")
+
+[node name="ArmL1_ArmL2" type="PinJoint2D" parent="Joints" unique_id=315784318]
+position = Vector2(-5, 12)
+node_a = NodePath("../../ArmL1")
+node_b = NodePath("../../ArmL2")
+
+[node name="ArmR1_ArmR2" type="PinJoint2D" parent="Joints" unique_id=933491866]
+position = Vector2(-5, 12)
+node_a = NodePath("../../ArmR1")
+node_b = NodePath("../../ArmR2")
+
+[node name="Body_LegL1" type="PinJoint2D" parent="Joints" unique_id=1183756693]
+position = Vector2(-23, 56)
+node_a = NodePath("../../Body")
+node_b = NodePath("../../LegL1")
+
+[node name="Body_LegR1" type="PinJoint2D" parent="Joints" unique_id=282700607]
+position = Vector2(25, 54)
+node_a = NodePath("../../Body")
+node_b = NodePath("../../LegR1")
+
+[node name="LegL1_LegL2" type="PinJoint2D" parent="Joints" unique_id=2088261543]
+position = Vector2(-26, 118)
+node_a = NodePath("../../LegL1")
+node_b = NodePath("../../LegL2")
+
+[node name="LegR1_LegR2" type="PinJoint2D" parent="Joints" unique_id=1140031286]
+position = Vector2(22, 119)
+node_a = NodePath("../../LegR1")
+node_b = NodePath("../../LegR2")
+
+[node name="ArmL1" type="RigidBody2D" parent="." unique_id=54703381]
+position = Vector2(-5, -19)
+collision_layer = 0
+collision_mask = 0
+input_pickable = true
+gravity_scale = -2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="ArmL1" unique_id=30482702]
+scale = Vector2(2, 2)
+texture = ExtResource("4_dwajs")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArmL1" unique_id=1629411574]
+shape = SubResource("CapsuleShape2D_7m3ko")
+
+[node name="ArmL2" type="RigidBody2D" parent="." unique_id=1412036889 node_paths=PackedStringArray("particles", "rider")]
+position = Vector2(-6, 48)
+collision_mask = 0
+input_pickable = true
+gravity_scale = -2.0
+script = ExtResource("3_g3mg6")
+particles = NodePath("../GrabParticles")
+rider = NodePath("..")
+
+[node name="Sprite2D" type="Sprite2D" parent="ArmL2" unique_id=1400612921]
+scale = Vector2(2, 2)
+texture = ExtResource("5_dt3rm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArmL2" unique_id=493656644]
+position = Vector2(0, 0.5)
+shape = SubResource("CapsuleShape2D_f46kd")
+
+[node name="LegL1" type="RigidBody2D" parent="." unique_id=309377611]
+position = Vector2(-25.5, 85)
+collision_layer = 0
+collision_mask = 0
+input_pickable = true
+gravity_scale = -2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="LegL1" unique_id=1019461552]
+scale = Vector2(2, 2)
+texture = ExtResource("6_atfka")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LegL1" unique_id=940864507]
+shape = SubResource("CapsuleShape2D_nmc1l")
+
+[node name="LegL2" type="RigidBody2D" parent="." unique_id=1389267610 node_paths=PackedStringArray("particles", "rider")]
+position = Vector2(-26, 158)
+collision_mask = 0
+input_pickable = true
+gravity_scale = -2.0
+script = ExtResource("3_g3mg6")
+particles = NodePath("../GrabParticles")
+rider = NodePath("..")
+
+[node name="Sprite2D" type="Sprite2D" parent="LegL2" unique_id=726944599]
+position = Vector2(19, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("7_be4wm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LegL2" unique_id=462059019]
+position = Vector2(0, 0.5)
+shape = SubResource("CapsuleShape2D_f46kd")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="LegL2" unique_id=2077384668]
+position = Vector2(31, 27)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_atfka")
+
+[node name="Body" type="RigidBody2D" parent="." unique_id=968710059]
+collision_layer = 2
+collision_mask = 2
+input_pickable = true
+gravity_scale = -2.0
+
+[node name="BodySprite" type="Sprite2D" parent="Body" unique_id=875329166]
+scale = Vector2(2, 2)
+texture = ExtResource("1_pprhf")
+
+[node name="HeadSprite" type="Sprite2D" parent="Body" unique_id=2016205781]
+position = Vector2(4.6499996, -115)
+scale = Vector2(2, 2)
+texture = ExtResource("2_junom")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body" unique_id=1696066280]
+shape = SubResource("CapsuleShape2D_ykyjo")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Body" unique_id=1110202535]
+position = Vector2(-4, -115)
+shape = SubResource("CircleShape2D_uxov2")
+
+[node name="ArmR1" type="RigidBody2D" parent="." unique_id=1807627002]
+position = Vector2(-5, -19)
+collision_layer = 0
+collision_mask = 0
+input_pickable = true
+gravity_scale = -2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="ArmR1" unique_id=918786376]
+scale = Vector2(2, 2)
+texture = ExtResource("4_dwajs")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArmR1" unique_id=268562670]
+shape = SubResource("CapsuleShape2D_nmc1l")
+
+[node name="ArmR2" type="RigidBody2D" parent="." unique_id=1216721292 node_paths=PackedStringArray("particles", "rider")]
+position = Vector2(-6, 48)
+collision_mask = 0
+input_pickable = true
+gravity_scale = -2.0
+script = ExtResource("3_g3mg6")
+particles = NodePath("../GrabParticles")
+rider = NodePath("..")
+
+[node name="Sprite2D" type="Sprite2D" parent="ArmR2" unique_id=2019278228]
+scale = Vector2(2, 2)
+texture = ExtResource("5_dt3rm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArmR2" unique_id=1641640167]
+shape = SubResource("CapsuleShape2D_f46kd")
+
+[node name="LegR1" type="RigidBody2D" parent="." unique_id=573639371]
+position = Vector2(22.5, 86)
+collision_layer = 0
+collision_mask = 0
+input_pickable = true
+gravity_scale = -2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="LegR1" unique_id=1241423109]
+scale = Vector2(2, 2)
+texture = ExtResource("6_atfka")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LegR1" unique_id=1685317904]
+shape = SubResource("CapsuleShape2D_nmc1l")
+
+[node name="LegR2" type="RigidBody2D" parent="." unique_id=2124550904 node_paths=PackedStringArray("particles", "rider")]
+position = Vector2(22, 159)
+collision_mask = 0
+input_pickable = true
+gravity_scale = -2.0
+script = ExtResource("3_g3mg6")
+particles = NodePath("../GrabParticles")
+rider = NodePath("..")
+
+[node name="Sprite2D" type="Sprite2D" parent="LegR2" unique_id=1959053105]
+position = Vector2(19, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("7_be4wm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LegR2" unique_id=373640385]
+position = Vector2(0, 0.5)
+shape = SubResource("CapsuleShape2D_f46kd")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="LegR2" unique_id=726579927]
+position = Vector2(31, 27)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_atfka")
+
+[node name="GrabParticles" type="GPUParticles2D" parent="." unique_id=838176858]
+position = Vector2(-359, 282)
+emitting = false
+amount = 16
+texture = ExtResource("9_atfka")
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_atfka")

@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://cbsfqukshbpn3"]
+
+[ext_resource type="Script" uid="uid://k468mwx8avg5" path="res://src/bull.gd" id="1_lj6xb"]
+[ext_resource type="Texture2D" uid="uid://1pxq2uigiymi" path="res://textures/bull/stick.png" id="2_8ywxu"]
+[ext_resource type="PackedScene" uid="uid://suhlxvis8mdv" path="res://objects/limb_joint.tscn" id="3_8i6ne"]
+[ext_resource type="Texture2D" uid="uid://cu8o8dmby7x2d" path="res://textures/bull/bull.png" id="3_x3r0w"]
+
+[sub_resource type="Animation" id="Animation_prlga"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bull:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.2617994]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bull:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-18, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jfkb0"]
+resource_name = "sway"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bull:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1, 1.4, 2, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.2617994, 0.2617994, -0.34906584, -0.34906584, 0.2617994, 0.2617994]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bull:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 1, 1.4, 2, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(10, 0), Vector2(10, 0), Vector2(-18, 0), Vector2(-18, 0), Vector2(10, 0), Vector2(10, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ysasw"]
+_data = {
+&"RESET": SubResource("Animation_prlga"),
+&"sway": SubResource("Animation_jfkb0")
+}
+
+[node name="Bull" type="CharacterBody2D" unique_id=1103151286]
+script = ExtResource("1_lj6xb")
+
+[node name="Stick" type="Node2D" parent="." unique_id=1801664749]
+
+[node name="Sprite2D" type="Sprite2D" parent="Stick" unique_id=765414509]
+scale = Vector2(2, 2)
+texture = ExtResource("2_8ywxu")
+
+[node name="Bull" type="Node2D" parent="." unique_id=609070031]
+position = Vector2(-18, 0)
+rotation = 0.2617994
+
+[node name="Sprite2D" type="Sprite2D" parent="Bull" unique_id=491727802]
+scale = Vector2(2, 2)
+texture = ExtResource("3_x3r0w")
+offset = Vector2(6, -80)
+
+[node name="LimbJoint_RightLeg" parent="Bull" unique_id=782151775 instance=ExtResource("3_8i6ne")]
+position = Vector2(-2.1757002, -51.811314)
+scale = Vector2(2, 2)
+
+[node name="LimbJoint_LeftLeg" parent="Bull" unique_id=23462902 instance=ExtResource("3_8i6ne")]
+position = Vector2(-76.175705, -59.811314)
+scale = Vector2(2, 2)
+
+[node name="LimbJoint_RightArm" parent="Bull" unique_id=1589432018 instance=ExtResource("3_8i6ne")]
+position = Vector2(127.824295, -226.81133)
+scale = Vector2(2, 2)
+
+[node name="LimbJoint_LeftArm" parent="Bull" unique_id=1505460773 instance=ExtResource("3_8i6ne")]
+position = Vector2(53.824303, -260.8113)
+scale = Vector2(2, 2)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=522845634]
+libraries/ = SubResource("AnimationLibrary_ysasw")
+speed_scale = 9.69

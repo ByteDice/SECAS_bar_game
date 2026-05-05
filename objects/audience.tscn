@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://cahryip7wkm78"]
+
+[ext_resource type="Script" uid="uid://dwbxgtss31a7h" path="res://src/audience.gd" id="1_b7u11"]
+[ext_resource type="Texture2D" uid="uid://c3c8uan5nr1co" path="res://textures/audience_1.png" id="2_2xap8"]
+[ext_resource type="Texture2D" uid="uid://pm5v4rb2gm2r" path="res://textures/audience_2.png" id="3_ildya"]
+
+[sub_resource type="Animation" id="Animation_b7u11"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2xap8"]
+resource_name = "bounce"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -20), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ildya"]
+_data = {
+&"RESET": SubResource("Animation_b7u11"),
+&"bounce": SubResource("Animation_2xap8")
+}
+
+[node name="Audience" type="Node2D" unique_id=1893641320]
+script = ExtResource("1_b7u11")
+
+[node name="Anchor" type="Node2D" parent="." unique_id=741657461]
+
+[node name="Audience1" type="Sprite2D" parent="Anchor" unique_id=1827484278]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_2xap8")
+
+[node name="Audience2" type="Sprite2D" parent="Anchor" unique_id=344814557]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_ildya")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1972811129]
+libraries/ = SubResource("AnimationLibrary_ildya")

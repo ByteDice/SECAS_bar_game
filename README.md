@@ -7,7 +7,7 @@ A game made for the LBS gymnasium game-jam #3 (2026).\
 > Expect a buggy mess (because game-jam).
 
 ## How to play
-Download the source and open it in Godot (4.5).
+Download the source and open it in Godot (was developed in 4.6.2).
 
 The goal is to keep the farmer on the mechanical bull by dragging their limbs to the handles
 when the farmer loses grip.\

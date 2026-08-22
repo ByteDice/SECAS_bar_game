@@ -1,3 +1,6 @@
+> [!NOTE]
+> This repository has been moved to https://git.bytedice.net/ByteDice/SECAS_bar_game
+
 # Super Epic Cool Awesome Stuff: The Bar Game
 A game made for the LBS gymnasium game-jam #3 (2026).\
 (Duration: 42 hours. Theme: "Riding Farmers")
